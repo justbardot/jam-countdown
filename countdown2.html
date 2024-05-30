@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        .timer {
+            font-size: 48px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="timer" id="timer"></div>
+
+    <script>
+        // Set the date and time for the countdown to end (9 AM KST)
+        const endTime = new Date('2024-06-01T00:00:00Z'); // This is 9 AM KST (UTC+9)
+
+        // Update the countdown every 1 second
+        const countdown = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = endTime - now;
+
+            // Time calculations for hours, minutes, and seconds
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Display the result in the element with id="timer"
+            document.getElementById('timer').innerHTML = hours + "h " + minutes + "m " + seconds + "s ";
+
+            // If the countdown is finished, write some text
+            if (distance < 0) {
+                clearInterval(countdown);
+                document.getElementById('timer').innerHTML = "EXPIRED";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
